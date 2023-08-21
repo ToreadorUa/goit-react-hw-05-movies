@@ -21,7 +21,7 @@ export const Cast = () => {
       }
     };
     fetchCast();
-  }, []);
+  }, [movieId]);
   console.log(castData);
   if (castData) {
     return (
@@ -33,7 +33,7 @@ export const Cast = () => {
                 {profile_path ? (
                   <img src={BASE_URL_IMG + '/w185' + profile_path} alt={name} />
                 ) : (
-                  <img src={imgPlug} alt="No photo" width="185" />
+                  <img src={imgPlug} alt="NoPhoto" width="185" />
                 )}
                 <p>
                   {name} as {character}
