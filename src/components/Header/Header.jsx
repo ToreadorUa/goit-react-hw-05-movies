@@ -1,5 +1,4 @@
-import Home from 'pages/Home/Home';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <div>

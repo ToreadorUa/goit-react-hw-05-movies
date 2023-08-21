@@ -23,7 +23,7 @@ const MovieDetails = () => {
       <div>
         <button> Go Back</button>
         <img src={BASE_URL_IMG + '/w300' + poster_path} alt="movie_img" />
-        <h1>{movieData.title}</h1>
+        <h1>{title}</h1>
         <p>User score {vote_average}</p>
         <h2>Overview</h2>
         <p>{overview}</p>
