@@ -15,7 +15,7 @@ const Movies = () => {
     if (query !== '') {
       search(query);
     }
-  }, [query]);
+  }, [query, search]);
 
   const search = async () => {
     const respData = await getFindMovie(query);
