@@ -6,10 +6,8 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import btnBack from '../../images/Back-Button1.png';
 import {
   AddList,
-  Container,
   MovieContainer,
   MovieInfoCont,
-  MovieWrapper,
   StyledLi,
   TitleAdd,
 } from './MovieDetails.styled';
