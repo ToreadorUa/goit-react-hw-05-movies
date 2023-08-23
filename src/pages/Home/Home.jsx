@@ -11,7 +11,6 @@ const Home = () => {
     getTranding()
       .then(data => {
         setTrandingArr(data.results);
-        console.log(data.results);
       })
       .catch(err => console.log(err));
   }, []);

@@ -8,18 +8,22 @@ import { NoResults } from 'components/Reviews/Reviews.styled';
 
 const Movies = () => {
   const [dataQuery, setDataQuery] = useState([]);
+  const [message, setMessage] = useState('');
+
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
   const location = useLocation();
+
   useEffect(() => {
     if (query !== '') {
       search(query);
     }
-  }, [query, search]);
+  }, []);
 
   const search = async () => {
     const respData = await getFindMovie(query);
     setDataQuery(respData.results);
+    if (dataQuery.length === 0) setMessage('There are nothing, try again!');
   };
 
   return (
@@ -58,18 +62,16 @@ const Movies = () => {
 
       {!!dataQuery.length ? (
         <ImageGallery>
-          {dataQuery.map(({ id, title, release_date }) => {
-            return (
-              <li key={id}>
-                <Link to={`${id}`} state={{ from: location }}>
-                  {title} ({release_date.substr(0, 4)})
-                </Link>
-              </li>
-            );
-          })}
+          {dataQuery.map(({ id, title, release_date }) => (
+            <li key={id}>
+              <Link to={`${id}`} state={{ from: location }}>
+                {title} ({release_date.substr(0, 4)})
+              </Link>
+            </li>
+          ))}
         </ImageGallery>
       ) : (
-        <NoResults>There are nothing, try again!</NoResults>
+        <NoResults>{message}</NoResults>
       )}
     </div>
   );
