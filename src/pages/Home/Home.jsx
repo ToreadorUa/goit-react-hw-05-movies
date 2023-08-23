@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>Tranding Today</h1>
+      <h1 style={{ textAlign: 'center' }}>Tranding Today</h1>
       <ImageGallery>
         {trandingArr.map(({ id, original_title, release_date }) => (
           <li key={id}>

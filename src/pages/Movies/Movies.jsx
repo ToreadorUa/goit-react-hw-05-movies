@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { IconSearch, InputFind } from './Movies.styled';
 import { ImageGallery } from 'pages/Home/Home.styled';
+import { NoResults } from 'components/Reviews/Reviews.styled';
 
 const Movies = () => {
   const [dataQuery, setDataQuery] = useState([]);
@@ -20,7 +21,7 @@ const Movies = () => {
     const respData = await getFindMovie(query);
     setDataQuery(respData.results);
   };
-  console.log(dataQuery);
+
   return (
     <div>
       <form
@@ -30,7 +31,6 @@ const Movies = () => {
           search();
         }}
       >
-        {/* <label htmlFor="search">Find movie:</label> */}
         <div style={{ position: 'relative' }}>
           <InputFind
             type="text"
@@ -56,7 +56,7 @@ const Movies = () => {
         </div>
       </form>
 
-      {!!dataQuery.length && (
+      {!!dataQuery.length ? (
         <ImageGallery>
           {dataQuery.map(({ id, title, release_date }) => {
             return (
@@ -68,6 +68,8 @@ const Movies = () => {
             );
           })}
         </ImageGallery>
+      ) : (
+        <NoResults>There are nothing, try again!</NoResults>
       )}
     </div>
   );
