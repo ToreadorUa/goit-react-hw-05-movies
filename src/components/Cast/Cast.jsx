@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import imgPlug from '../../images/placeholder.png';
+import { CastGallery, CastImg } from './Cast.styled';
 
-export const Cast = () => {
-  const [castData, setCastData] = useState();
+const Cast = () => {
+  const [castData, setCastData] = useState([]);
 
   const params = useParams();
   const movieId = params.movieId;
@@ -23,26 +24,34 @@ export const Cast = () => {
     fetchCast();
   }, [movieId]);
   console.log(castData);
-  if (castData) {
+  if (castData.length > 0) {
     return (
       <div>
-        <ul>
+        <CastGallery>
           {castData.map(({ name, character, profile_path, id }) => {
             return (
               <li key={id}>
                 {profile_path ? (
-                  <img src={BASE_URL_IMG + '/w185' + profile_path} alt={name} />
+                  <CastImg
+                    src={BASE_URL_IMG + '/w185' + profile_path}
+                    alt={name}
+                  />
                 ) : (
-                  <img src={imgPlug} alt="NoPhoto" width="185" />
+                  <CastImg src={imgPlug} alt="NoPhoto" width="185" />
                 )}
                 <p>
-                  {name} as {character}
+                  <b>{name}</b> as <br />
+                  <i>{character}</i>
                 </p>
               </li>
             );
           })}
-        </ul>
+        </CastGallery>
       </div>
     );
+  } else {
+    return <div>There are not data for cast of this movie</div>;
   }
 };
+
+export default Cast;

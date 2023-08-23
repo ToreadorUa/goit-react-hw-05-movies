@@ -1,17 +1,17 @@
 import { getTranding } from 'api/getFilms';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { ImageGallery } from './Home.styled';
 
 const Home = () => {
   const [trandingArr, setTrandingArr] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     getTranding()
       .then(data => {
         setTrandingArr(data.results);
         console.log(data.results);
-        //  if (!resp.ok)
-        //  throw new Error('Something went wrong')
       })
       .catch(err => console.log(err));
   }, []);
@@ -19,13 +19,15 @@ const Home = () => {
   return (
     <>
       <h1>Tranding Today</h1>
-      <ul>
-        {trandingArr.map(({ id, original_title }) => (
+      <ImageGallery>
+        {trandingArr.map(({ id, original_title, release_date }) => (
           <li key={id}>
-            <Link to={`movies/${id}`}>{original_title}</Link>
+            <Link to={`movies/${id}`} state={{ from: location }}>
+              {original_title} ({release_date.substr(0, 4)})
+            </Link>
           </li>
         ))}
-      </ul>
+      </ImageGallery>
     </>
   );
 };

@@ -33,14 +33,12 @@ export const getMovieCredits = async (movieId) => {
 export const getMovieReview = async (movieId) => {
     const resp = await fetch(`${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`);
     if (!resp.ok) throw new Error('Smth went wrong')
-    
     return resp.json();
 }
 
 //https://api.themoviedb.org/3/search/movie?query=bat&language=en-US&page=1&api_key=92d9d3b4ee00fe21e96f6da37ec5a945
 export const getFindMovie = async (q) => {
     const resp = await fetch(`${BASE_URL}search/movie?query=${q}&api_key=${API_KEY}&language=en-US&page=1`);
-    console.log(resp);
     if (!resp.ok) { throw new Error('Smth went wrong') }
     return resp.json();
 }
